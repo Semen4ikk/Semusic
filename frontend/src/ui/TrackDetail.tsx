@@ -1,21 +1,10 @@
-import {useEffect, useState} from "react";
-import {getTrack, type GetTrackDetailOutputData} from "../dal/api.ts";
+import {useTrackDetail} from "../bll/useTrackDetail.tsx";
 
 type Props = {
     trackId: string | null;
 }
 export function TrackDetail({trackId}:Props){
-    const [selectedTrack, setSelectedTrack] = useState<null | GetTrackDetailOutputData>(null)
-
-    useEffect(()=>{
-        if(!trackId){
-            setSelectedTrack(null)
-            return;
-        }
-        const promise = getTrack(trackId)
-
-            promise.then(json => setSelectedTrack(json.data))
-    },[trackId])
+    const {selectedTrack} = useTrackDetail(trackId);
 
     return (
         <div>

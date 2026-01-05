@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
 import {TrackItem} from "./TrackItem.tsx";
-import {getTracks} from "../dal/api.ts";
+import {useTracks} from "../bll/useTracks.tsx";
 
-type TrackListItemOutput = {
+
+export type TrackListItemOutput = {
     id: string;
     attributes: {
         title: string | null;
@@ -13,16 +13,10 @@ type Props = {
     selectedTrackId: string| null;
     onTrackSelect: (id: string | null) => void;
 }
+
+
 export function TracksList({selectedTrackId, onTrackSelect}:Props) {
-    const [tracks, setTracks] = useState<null|Array<TrackListItemOutput>>(null);
-
-    useEffect(() => {
-
-
-            getTracks().then(json => setTracks(json.data))
-
-
-    }, [])
+    const {tracks} = useTracks();
 
     if (tracks === null) {
         return (
