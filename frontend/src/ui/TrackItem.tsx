@@ -1,4 +1,5 @@
-
+import styles from './TracksList.module.css'
+import clsx from "clsx";
 type Props = {
     isSelected: boolean;
     onSelect: (trackId: string) => void;
@@ -13,10 +14,12 @@ type Props = {
 
 export function TrackItem({track, isSelected,onSelect }: Props) {
     const handleClick = () => {onSelect?.(track.id);}
+    const className = clsx({
+        [styles.track]: true,
+        [styles.selected]: isSelected,
+    })
     return (
-        <li key={track.id} style={{
-            border: isSelected ? "1px solid yellow" : "none"
-        }}>
+        <li className={className} key={track.id} >
             <div onClick={handleClick}>
                 {track.attributes.title}
             </div>

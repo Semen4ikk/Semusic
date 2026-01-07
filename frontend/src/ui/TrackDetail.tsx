@@ -1,5 +1,5 @@
 import {useTrackDetail} from "../bll/useTrackDetail.tsx";
-
+import styles from "./TrackDetail.module.css"
 type Props = {
     trackId: string | null;
 }
@@ -7,7 +7,7 @@ export function TrackDetail({trackId}:Props){
     const {selectedTrack} = useTrackDetail(trackId);
 
     return (
-        <div>
+        <div className={styles.track}>
             <h2>Details</h2>
             {!selectedTrack && !trackId && "Track is not selected"}
             {!selectedTrack && trackId && "Loading..."}
